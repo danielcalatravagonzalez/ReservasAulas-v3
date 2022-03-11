@@ -1,5 +1,13 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -13,6 +21,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IAulas;
 public class Aulas implements IAulas {
 	// Atributos
 	private List<Aula> coleccionAulas;
+	private static final String NOMBRE_FICHEROS_AULAS = "datos/aulas.dat";
 
 	// Constructor por defecto
 	public Aulas() {
@@ -25,6 +34,56 @@ public class Aulas implements IAulas {
 			throw new NullPointerException("ERROR: No se pueden copiar aulas nulas.");
 		} else {
 			setAulas(copiaAulas);
+		}
+	}
+	
+	
+	//Método comenzar
+	@Override
+	public void comenzar() {
+		leer();
+	}
+	
+	//Método leer
+	private void leer() {
+		File ficherosAulas = new File(NOMBRE_FICHEROS_AULAS);
+		try {ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(ficherosAulas));
+		Aula aula = null;
+		do {
+			aula = (Aula) entrada.readObject();
+			insertar(aula);
+		}while(aula != null);
+			
+		} catch (ClassNotFoundException e)  {
+			System.out.println("ERROR: No puedo encontrar la clase que tengo que leer.");	
+		} catch (FileNotFoundException e)  {
+			System.out.println("ERROR: No puedo abrir el fichero de aulas.");	
+		} catch (EOFException e)  {
+			System.out.println("Fichero aulas leído satisfactoriamente.");	
+		} catch (IOException e)  {
+			System.out.println("ERROR inesperado de Entrada/Salida.");	
+		} catch (OperationNotSupportedException e)  {
+			System.out.println(e.getMessage());	
+		}
+	}
+	
+	//Método terminar
+	@Override
+	public void teminar() {
+		escribir();
+	}
+	
+	//Método escribir
+	private void escribir() {
+		File ficherosAulas = new File(NOMBRE_FICHEROS_AULAS);
+		try {ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ficherosAulas));
+		for (Aula aula : coleccionAulas)
+			salida.writeObject(aula);
+		System.out.println("Fichero aulas escrito satisfactoriamente.");
+		} catch (FileNotFoundException e)  {
+			System.out.println("ERROR: No puedo abrir el fichero de aulas.");	
+		} catch (IOException e)  {
+			System.out.println("ERROR inesperado de Entrada/Salida.");	
 		}
 	}
 
@@ -112,17 +171,5 @@ public class Aulas implements IAulas {
 			representacion.add(iterador.next().toString());
 		}
 		return representacion;
-	}
-
-	@Override
-	public void comenzar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void teminar() {
-		// TODO Auto-generated method stub
-		
 	}
 }
