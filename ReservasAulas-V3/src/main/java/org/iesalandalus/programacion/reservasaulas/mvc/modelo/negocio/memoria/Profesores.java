@@ -116,4 +116,16 @@ public class Profesores implements IProfesores {
 		}
 		return representacion;
 	}
+
+	@Override
+	public void comenzar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void teminar() {
+		// TODO Auto-generated method stub
+		
+	}
 }
