@@ -24,6 +24,22 @@ public class Modelo implements IModelo {
 		profesores = fuenteDatos.crearProfesores();
 		reservas = fuenteDatos.crearReservas();
 	}
+	
+	//Método comenzar
+	@Override
+	public void comenzar() {
+		aulas.comenzar();
+		profesores.comenzar();
+		reservas.comenzar();
+	}
+	
+	//Método terminar
+	@Override
+	public void terminar() {
+		aulas.teminar();
+		profesores.teminar();
+		reservas.teminar();
+	}
 
 	// Método List<Aula> getAulas
 	@Override
@@ -156,4 +172,5 @@ public class Modelo implements IModelo {
 	public boolean consultarDisponibilidad(Aula aula, Permanencia permanencia) {
 		return reservas.consultarDisponibilidad(aula, permanencia);
 	}
+
 }
