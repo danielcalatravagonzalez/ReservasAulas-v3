@@ -1,7 +1,7 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,28 +33,25 @@ public class Aulas implements IAulas {
 		if (aulas == null) {
 			throw new NullPointerException("ERROR: No se puede copiar un aula nula.");
 		} else {
-			this.coleccionAulas = aulas.getAulas();
+			coleccionAulas = aulas.getAulas();
 		}
 	}
 
-	// Método List<Aula> getAulas(), coge una copia del método copiaProfunda para evitar aliasing, creamos
-	// una variable para ordenar las aulas de coleccionAulas por nombre, por último devolvemos
-	// la variable
+	// Método List<Aula> getAulas(), coge una copia del método copiaProfunda para evitar aliasing
 	@Override
 	public List<Aula> getAulas() {
-		List<Aula> aulasOrdenadas = copiaProfundaAulas(coleccionAulas);
-		aulasOrdenadas.sort(Comparator.comparing(Aula::getNombre));
-		return aulasOrdenadas;
+		return copiaProfundaAulas(coleccionAulas);
 	}
 
 	// Método copiaProfundaAulas
 	private List<Aula> copiaProfundaAulas(List<Aula> listaAulas) {
-		List<Aula> copiaProfunda = new ArrayList<>();
+		List<Aula> copiaAulas = new ArrayList<Aula>();
 		Iterator<Aula> iterador = listaAulas.iterator();
 		while (iterador.hasNext()) {
-			copiaProfunda.add(new Aula(iterador.next()));
+			copiaAulas.add(new Aula(iterador.next()));
 		}
-		return copiaProfunda;
+		Collections.sort(copiaAulas);
+		return copiaAulas;
 	}
 
 	// Método getNumAulas, obtiene tamaño de la coleccion
@@ -77,21 +74,20 @@ public class Aulas implements IAulas {
 		}
 	}
 
-	// Método buscar, validamos null, si no es null utilizamos index of para ver si encuentra esa aula,
-	// si no existe saldrá -1 y se devuelve null, si no añadimos esa aula
+	// Método buscar
 	@Override
 	public Aula buscar(Aula aula) {
 		if (aula == null) {
 			throw new NullPointerException("ERROR: No se puede buscar un aula nula.");
 		}
-		Aula aulaEncontrada = null;
-		int indice = coleccionAulas.indexOf(aula);
-		if (indice == -1) {
-			aulaEncontrada = null;
-		} else {
-			aulaEncontrada = new Aula(coleccionAulas.get(indice));
+		Iterator<Aula> iterador = coleccionAulas.iterator();
+		while (iterador.hasNext()) {
+			Aula aulaBuscada = iterador.next();
+			if (aula.equals(aulaBuscada)) {
+				return new Aula(aulaBuscada);
+			}
 		}
-		return aulaEncontrada;
+		return null;
 	}
 
 	// Método borrar, validamos null, si no es null comprueba si la colección tiene el aula

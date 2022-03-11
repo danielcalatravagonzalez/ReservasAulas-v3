@@ -31,9 +31,13 @@ public abstract class Permanencia {
 	private void setDia(LocalDate dia) {
 		if (dia == null) {
 			throw new NullPointerException ("ERROR: El día de una permanencia no puede ser nulo.");
-		} else {
-		this.dia = dia;
 		}
+		LocalDate fechaActual = LocalDate.now();
+		if(dia.compareTo(fechaActual) < 0) {
+			throw new IllegalArgumentException("ERROR: No puedes introducir una fecha anterior a la actual.");
+		}
+		
+		this.dia = dia;
 	}
 	
 	//Método int getPuntos()

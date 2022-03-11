@@ -1,8 +1,9 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Profesor {
+public class Profesor implements Comparable<Profesor>, Serializable {
 	// Atributos
 	private static final String ER_TELEFONO = ("[69][0-9]{8}");
 	private static final String ER_CORREO = ("[A-Za-z0-9+_.-]+@[a-z]+(\\.)[a-z]+$");
@@ -134,4 +135,9 @@ public class Profesor {
 		return sb.toString();
 	}
 
+	//Método compareTo
+	@Override
+	public int compareTo(Profesor o) {
+		return getCorreo().compareTo(o.getCorreo());
+	}
 }

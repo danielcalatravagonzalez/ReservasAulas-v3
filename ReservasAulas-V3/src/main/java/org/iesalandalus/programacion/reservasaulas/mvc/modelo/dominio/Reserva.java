@@ -1,12 +1,13 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Reserva {
+public class Reserva implements Comparable<Reserva>, Serializable {
 	//Atributos
-	public Profesor profesor;
-	public Aula aula;
-	public Permanencia permanencia;
+	private Profesor profesor;
+	private Aula aula;
+	private Permanencia permanencia;
 	
 	//Constructor con parámetros
 	public Reserva (Profesor profesor, Aula aula, Permanencia permanencia) {
@@ -71,14 +72,7 @@ public class Reserva {
 	// Getter de permanencia, creamos una variable copia para diferenciar las instancias entre tramo y hora
 	// y el método devuelve la variable copiaPermanencia
 	public Permanencia getPermanencia() {
-		Permanencia copiaPermanencia=null;
-		if (permanencia instanceof PermanenciaPorHora) {
-			copiaPermanencia=new PermanenciaPorHora((PermanenciaPorHora)permanencia);
-		}
-		else if (permanencia instanceof PermanenciaPorTramo) {
-			copiaPermanencia=new PermanenciaPorTramo((PermanenciaPorTramo)permanencia);
-		}
-		return copiaPermanencia;
+		return permanencia;
 	}
 	
 	// Método getReservaFicticia, a partir de un Aula y una permanencia por parámetro
@@ -116,4 +110,35 @@ public class Reserva {
 		return profesor.toString() + ", " + aula.toString() + ", " + permanencia.toString() + ", puntos=" + String.format("%.1f", getPuntos()) + "";
 	}
 	
+	//Método compareTo
+	@Override
+	public int compareTo(Reserva o) {
+		int comparadorAula = getAula().getNombre().compareTo(o.getAula().getNombre());
+
+		if (comparadorAula == 0) {
+
+			int comparadorFecha = getPermanencia().getDia().compareTo(o.getPermanencia().getDia());
+			if (comparadorFecha == 0) {
+				if (getPermanencia() instanceof PermanenciaPorTramo
+						&& o.getPermanencia() instanceof PermanenciaPorTramo) {
+					if (((PermanenciaPorTramo) getPermanencia()).getTramo() == Tramo.MANANA
+							&& ((PermanenciaPorTramo) o.getPermanencia()).getTramo() == Tramo.TARDE) {
+						return -1;
+					} else if (((PermanenciaPorTramo) getPermanencia()).getTramo() == Tramo.TARDE
+							&& ((PermanenciaPorTramo) o.getPermanencia()).getTramo() == Tramo.MANANA) {
+						return 1;
+					} else {
+						return 0;
+					}
+				} else {
+					return ((PermanenciaPorHora) getPermanencia()).getHora()
+							.compareTo(((PermanenciaPorHora) o.getPermanencia()).getHora());
+				}
+			}
+			return comparadorFecha;
+
+		}
+		return comparadorAula;
+	}
+
 }

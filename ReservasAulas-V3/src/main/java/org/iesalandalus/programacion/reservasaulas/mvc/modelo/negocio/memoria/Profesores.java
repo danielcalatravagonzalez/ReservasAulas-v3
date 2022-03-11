@@ -1,7 +1,7 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,20 +40,20 @@ public class Profesores implements IProfesores {
 	
 	// Método copiaProfundaProfesores
 	private List<Profesor> copiaProfundaProfesores(List<Profesor> listaProfesores) {
-		List<Profesor> copiaProfunda = new ArrayList<>();
+		List<Profesor> copiaProfesores = new ArrayList<Profesor>();
 		Iterator<Profesor> iterador = listaProfesores.iterator();
+
 		while (iterador.hasNext()) {
-			copiaProfunda.add(new Profesor(iterador.next()));
+			copiaProfesores.add(new Profesor(iterador.next()));
 		}
-		return copiaProfunda;
+		Collections.sort(copiaProfesores);
+		return copiaProfesores;
 	}
 
 	// Método List<Profesor> getProfesores(), coge una copia del método copiaProfunda para evitar aliasing
 	@Override
 	public List<Profesor> getProfesores() {
-		List<Profesor> profesoresOrdenados = copiaProfundaProfesores(coleccionProfesores);
-		profesoresOrdenados.sort(Comparator.comparing(Profesor::getCorreo));
-		return profesoresOrdenados;
+		return copiaProfundaProfesores(coleccionProfesores);
 	}
 
 	// Método getNumProfesores, obtiene tamaño de la coleccion
@@ -76,21 +76,21 @@ public class Profesores implements IProfesores {
 		}
 	}
 
-	// Método buscar, validamos null, si no es null utilizamos index of para ver si encuentra ese profesor,
-	// si no existe saldrá -1 y se devuelve null, si no añadimos ese profesor
+	// Método buscar
 	@Override
 	public Profesor buscar(Profesor profesor) {
 		if (profesor == null) {
 			throw new NullPointerException("ERROR: No se puede buscar un profesor nulo.");
 		}
-		Profesor profesorEncontrado = null;
-		int indice = coleccionProfesores.indexOf(profesor);
-		if (indice == -1) {
-			profesorEncontrado = null;
-		} else {
-			profesorEncontrado = new Profesor(coleccionProfesores.get(indice));
+		Iterator<Profesor> iterador = coleccionProfesores.iterator();
+
+		while (iterador.hasNext()) {
+			Profesor profesorBuscado = iterador.next();
+			if (profesor.equals(profesorBuscado)) {
+				return new Profesor(profesorBuscado);
+			}
 		}
-		return profesorEncontrado;
+		return null;
 	}
 
 	// Método borrar, validamos null, si no es null comprueba si la colección tiene el profesor

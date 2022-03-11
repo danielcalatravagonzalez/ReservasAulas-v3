@@ -22,14 +22,8 @@ public class PermanenciaPorHora extends Permanencia implements Comparable<Perman
 	//Constructor copia
 		public PermanenciaPorHora(PermanenciaPorHora otraPermanencia) {
 			super(otraPermanencia);
-			if (otraPermanencia == null) {
-				throw new NullPointerException ("ERROR: No se puede copiar una permanencia nula.");
-			} else if (otraPermanencia.hora != null && otraPermanencia.hora.isBefore(HORA_INICIO) && otraPermanencia.hora.isAfter(HORA_FIN)) {
-				throw new IllegalArgumentException ("ERROR: La hora de una permanencia no es válida.");	
-			} else {
-				setHora(otraPermanencia.getHora());
+			setHora(otraPermanencia.getHora());
 			}
-		}
 	
 	//Métodos get y Set de Hora
 	public LocalTime getHora() {

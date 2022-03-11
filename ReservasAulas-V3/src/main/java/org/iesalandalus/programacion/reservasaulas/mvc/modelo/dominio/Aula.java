@@ -1,8 +1,9 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Aula implements Comparable<Aula> {
+public class Aula implements Comparable<Aula>, Serializable {
 	//Atributos
 	private static final float PUNTOS_POR_PUESTO = (float) 0.5;
 	private static final int MIN_PUESTOS = 10;
@@ -61,8 +62,7 @@ public class Aula implements Comparable<Aula> {
 	
 	//Getter de puntos
 	public float getPuntos() {
-		float puntos = getPuestos()*PUNTOS_POR_PUESTO;
-		return puntos;
+		return PUNTOS_POR_PUESTO * puestos;
 	}
 	
 	//Método getAulaFicticia
@@ -95,9 +95,7 @@ public class Aula implements Comparable<Aula> {
 	//Método compareTo
 	@Override
 	public int compareTo(Aula aula) {
-		int resultado = 0;
-		resultado = this.getNombre().compareTo(aula.getNombre());
-		return resultado;
+		return getNombre().compareTo(aula.getNombre());
 	}
 
 
