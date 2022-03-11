@@ -299,4 +299,16 @@ public class Reservas implements IReservas {
 
 		return consulta;
 	}
+
+	@Override
+	public void comenzar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void teminar() {
+		// TODO Auto-generated method stub
+		
+	}
 }

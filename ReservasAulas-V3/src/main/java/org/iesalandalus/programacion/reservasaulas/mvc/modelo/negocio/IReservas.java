@@ -11,19 +11,22 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 
 public interface IReservas {
 
-	// Método List<Reservas> getReservas(), obtiene de la copiaProfunda y hace la comparación con aula y permanencia
-	// para luego ordenar las reservas por aula y permanencia
+	//Método comenzar
+	void comenzar();
+
+	//Método terminar
+	void teminar();
+
+	// Método List<Reservas> getReservas(), obtiene de la copiaProfunda 
 	List<Reserva> getReservas();
 
 	// Método getNumReservas, coge el tamaño de las reservas
 	int getNumReservas();
 
-	// Método insertar, si no es null primero busca si en coleccionReservas
-	// hay alguna coincidencia y si no la añadimos
+	// Método insertar
 	void insertar(Reserva reserva) throws OperationNotSupportedException;
 
-	// Método buscar, validamos null, si no es null utilizamos index of para ver si encuentra esa reserva,
-	// si no existe saldrá -1 y se devuelve null, si no añadimos esa reserva
+	// Método buscar
 	Reserva buscar(Reserva reserva);
 
 	// Método borrar, validamos null, si no es null con el método buscar comprueba donde está esa reserva
