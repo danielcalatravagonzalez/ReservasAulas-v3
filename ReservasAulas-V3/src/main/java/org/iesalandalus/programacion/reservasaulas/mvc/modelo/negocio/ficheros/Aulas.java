@@ -53,6 +53,7 @@ public class Aulas implements IAulas {
 			aula = (Aula) entrada.readObject();
 			insertar(aula);
 		}while(aula != null);
+		entrada.close();
 			
 		} catch (ClassNotFoundException e)  {
 			System.out.println("ERROR: No puedo encontrar la clase que tengo que leer.");	
@@ -79,6 +80,7 @@ public class Aulas implements IAulas {
 		try {ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ficherosAulas));
 		for (Aula aula : coleccionAulas)
 			salida.writeObject(aula);
+		salida.close();
 		System.out.println("Fichero aulas escrito satisfactoriamente.");
 		} catch (FileNotFoundException e)  {
 			System.out.println("ERROR: No puedo abrir el fichero de aulas.");	

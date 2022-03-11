@@ -13,8 +13,9 @@ public class MainApp {
 
 	public static void main(String[] args)  {
 		System.out.println("Programa para la gestión de reservas de espacios del IES Al-Ándalus");
-		IFuenteDatos factoriaMemoria = FactoriaFuenteDatos.MEMORIA.crear();
-		IModelo modelo = new Modelo(factoriaMemoria);
+		//IFuenteDatos factoriaMemoria = FactoriaFuenteDatos.MEMORIA.crear();
+		IFuenteDatos factoriaFicheros = FactoriaFuenteDatos.FICHEROS.crear();
+		IModelo modelo = new Modelo(factoriaFicheros);
 		IVista vista = new Vista();
 		IControlador controlador = new Controlador(modelo,vista);
 		controlador.comenzar();		

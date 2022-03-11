@@ -51,11 +51,12 @@ public class Profesores implements IProfesores {
 				profesor = (Profesor) entrada.readObject();
 				insertar(profesor);
 			}while(profesor != null);
+			entrada.close();
 				
 			} catch (ClassNotFoundException e)  {
 				System.out.println("ERROR: No puedo encontrar la clase que tengo que leer.");	
 			} catch (FileNotFoundException e)  {
-				System.out.println("ERROR: No puedo abrir el fichero de aulas.");	
+				System.out.println("ERROR: No puedo abrir el fichero de profesores.");	
 			} catch (EOFException e)  {
 				System.out.println("Fichero profesores leído satisfactoriamente.");	
 			} catch (IOException e)  {
@@ -77,6 +78,7 @@ public class Profesores implements IProfesores {
 			try {ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ficherosProfesores));
 			for (Profesor profesor : coleccionProfesores)
 				salida.writeObject(profesor);
+			salida.close();
 			System.out.println("Fichero aulas escrito satisfactoriamente.");
 			} catch (FileNotFoundException e)  {
 				System.out.println("ERROR: No puedo abrir el fichero de aulas.");	

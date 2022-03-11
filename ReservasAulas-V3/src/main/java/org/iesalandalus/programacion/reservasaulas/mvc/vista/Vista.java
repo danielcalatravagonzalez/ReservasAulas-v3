@@ -245,23 +245,22 @@ public class Vista implements IVista {
 	// Método consultarDisponibilidad
 	public void consultarDisponibilidad() {
 		Consola.mostrarCabecera("Consultar disponibilidad");
-		boolean disponibilidad = true;
-		Permanencia permanencia = null;
-		Aula aula = null;
 		try {
-			permanencia = Consola.leerPermanencia();
-			aula = Consola.leerAulaFicticia();
-			disponibilidad = Icontrolador.consultarDisponibilidad(aula, permanencia);
-		} catch (NullPointerException | IllegalArgumentException e) {
+			Permanencia permanencia = Consola.leerPermanencia();
+			Aula aulaBuscar = Icontrolador.buscarAula(Consola.leerAula());
+			if (aulaBuscar == null) {
+				System.out.println("El aula introducida no existe.");
+			} else {
+				if (Icontrolador.consultarDisponibilidad(aulaBuscar, permanencia)) {
+					System.out.println("El aula está disponible.");
+				} else {
+					System.out.println("El aula ya está reservada.");
+				}
+			}
+		} catch (NullPointerException e) {
 			System.out.println(e.getMessage());
-		}
-		if (Icontrolador.buscarAula(aula) == null) {
-			System.out.println("El aula introducida no existe");
-		} 
-		else if (disponibilidad == true) {
-			System.out.println("El aula se encuentra disponible para la permanencia y día introducidos.");
-		} else {
-			System.out.println("El aula no se encuentra disponible para la permanencia y día introducidos.");
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 

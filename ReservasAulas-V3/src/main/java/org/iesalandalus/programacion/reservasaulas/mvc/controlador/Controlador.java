@@ -33,12 +33,14 @@ public class Controlador implements IControlador {
 	//Método comenzar
 	@Override
 	public void comenzar() {
+		Imodelo.comenzar();
 		Ivista.comenzar();
 	}
 	
 	//Método terminar
 	@Override
 	public void terminar() {
+		Imodelo.terminar();
 		Ivista.salir();
 	}
 	

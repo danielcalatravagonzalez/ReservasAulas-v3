@@ -60,11 +60,12 @@ public class Reservas implements IReservas {
 					reserva = (Reserva) entrada.readObject();
 					insertar(reserva);
 				}while(reserva != null);
+				entrada.close();
 					
 				} catch (ClassNotFoundException e)  {
 					System.out.println("ERROR: No puedo encontrar la clase que tengo que leer.");	
 				} catch (FileNotFoundException e)  {
-					System.out.println("ERROR: No puedo abrir el fichero de aulas.");	
+					System.out.println("ERROR: No puedo abrir el fichero de reservas.");	
 				} catch (EOFException e)  {
 					System.out.println("Fichero reservas leído satisfactoriamente.");	
 				} catch (IOException e)  {
@@ -86,6 +87,7 @@ public class Reservas implements IReservas {
 				try {ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ficherosReservas));
 				for (Reserva reserva : coleccionReservas)
 					salida.writeObject(reserva);
+				salida.close();
 				System.out.println("Fichero aulas escrito satisfactoriamente.");
 				} catch (FileNotFoundException e)  {
 					System.out.println("ERROR: No puedo abrir el fichero de aulas.");	
