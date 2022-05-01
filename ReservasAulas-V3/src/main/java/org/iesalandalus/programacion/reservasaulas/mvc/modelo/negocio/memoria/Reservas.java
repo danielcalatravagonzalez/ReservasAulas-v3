@@ -29,20 +29,16 @@ public class Reservas implements IReservas {
 
 	// Constructor copia, valida null, si no es null coge el setter
 	public Reservas(IReservas copiaReservas) {
-		if (copiaReservas == null) {
-			throw new NullPointerException("ERROR: No se pueden copiar reservas nulas.");
-		} else {
-			setReservas(copiaReservas);
-		}
+		setReservas(copiaReservas);
 	}
 
 	// Método setReservas, valida null, si no es null obtiene arraylist por
 	// getReservas a coleccionReservas
 	private void setReservas(IReservas reservas) {
 		if (reservas == null) {
-			throw new NullPointerException("ERROR: No se puede copiar una reserva nula.");
+			throw new NullPointerException("ERROR: No se pueden copiar una reserva nulas.");
 		} else {
-			this.coleccionReservas = reservas.getReservas();
+			coleccionReservas = reservas.getReservas();
 		}
 	}
 
@@ -83,8 +79,7 @@ public class Reservas implements IReservas {
 			if (reservaExistente.getPermanencia() instanceof PermanenciaPorTramo && reserva.getPermanencia() instanceof PermanenciaPorHora) {
 				throw new OperationNotSupportedException("ERROR: Ya se ha realizado una reserva de otro tipo de permanencia para este día.");
 			}
-			if (reservaExistente.getPermanencia() instanceof PermanenciaPorHora
-					&& reserva.getPermanencia() instanceof PermanenciaPorTramo) {
+			if (reservaExistente.getPermanencia() instanceof PermanenciaPorHora && reserva.getPermanencia() instanceof PermanenciaPorTramo) {
 				throw new OperationNotSupportedException("ERROR: Ya se ha realizado una reserva de otro tipo de permanencia para este día.");
 			}
 		}
@@ -291,8 +286,8 @@ public class Reservas implements IReservas {
 
 		Iterator<Reserva> iterador = coleccionReservas.iterator();
 		while (iterador.hasNext()) {
-			Reserva auxiliar = iterador.next();
-			if (permanencia.equals(auxiliar.getPermanencia()) && aula.equals(auxiliar.getAula())) {
+			Reserva comprobar = iterador.next();
+			if (permanencia.equals(comprobar.getPermanencia()) && aula.equals(comprobar.getAula())) {
 				consulta = false;
 			}
 		}
@@ -307,7 +302,7 @@ public class Reservas implements IReservas {
 	}
 
 	@Override
-	public void teminar() {
+	public void terminar() {
 		// TODO Auto-generated method stub
 		
 	}

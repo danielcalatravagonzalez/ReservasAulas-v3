@@ -70,7 +70,7 @@ public class Aulas implements IAulas {
 	
 	//Método terminar
 	@Override
-	public void teminar() {
+	public void terminar() {
 		escribir();
 	}
 	

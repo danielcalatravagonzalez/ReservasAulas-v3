@@ -12,7 +12,7 @@ public interface IAulas {
 	void comenzar();
 
 	//Método terminar
-	void teminar();
+	void terminar();
 
 	// Método List<Aula> getAulas(), coge una copia del método copiaProfunda para evitar aliasing
 	List<Aula> getAulas();

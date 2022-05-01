@@ -15,7 +15,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.controlador.IControlador;
 
 public class Vista implements IVista {
 	// Atributos
-	IControlador Icontrolador;
+	private IControlador Icontrolador;
 
 //Constructor por defecto
 	public Vista() {
@@ -44,7 +44,7 @@ public class Vista implements IVista {
 	// Método salir
 	@Override
 	public void salir() {
-		System.out.println("¡Hasta la próxima!");
+		Icontrolador.terminar();
 	}
 
 	// Método insertarAula

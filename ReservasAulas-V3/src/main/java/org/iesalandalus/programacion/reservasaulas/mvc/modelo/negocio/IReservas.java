@@ -15,7 +15,7 @@ public interface IReservas {
 	void comenzar();
 
 	//Método terminar
-	void teminar();
+	void terminar();
 
 	// Método List<Reservas> getReservas(), obtiene de la copiaProfunda 
 	List<Reserva> getReservas();

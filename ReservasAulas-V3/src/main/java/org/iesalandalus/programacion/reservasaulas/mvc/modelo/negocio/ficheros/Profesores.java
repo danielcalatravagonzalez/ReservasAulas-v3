@@ -68,7 +68,7 @@ public class Profesores implements IProfesores {
 		
 		//Método terminar
 		@Override
-		public void teminar() {
+		public void terminar() {
 			escribir();
 		}
 		
@@ -79,7 +79,7 @@ public class Profesores implements IProfesores {
 			for (Profesor profesor : coleccionProfesores)
 				salida.writeObject(profesor);
 			salida.close();
-			System.out.println("Fichero aulas escrito satisfactoriamente.");
+			System.out.println("Fichero profesores escrito satisfactoriamente.");
 			} catch (FileNotFoundException e)  {
 				System.out.println("ERROR: No puedo abrir el fichero de aulas.");	
 			} catch (IOException e)  {

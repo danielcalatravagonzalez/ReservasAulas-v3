@@ -124,7 +124,7 @@ public class Profesores implements IProfesores {
 	}
 
 	@Override
-	public void teminar() {
+	public void terminar() {
 		// TODO Auto-generated method stub
 		
 	}

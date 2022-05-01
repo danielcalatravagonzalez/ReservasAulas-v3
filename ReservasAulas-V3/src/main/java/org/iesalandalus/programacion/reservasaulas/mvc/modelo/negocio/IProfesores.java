@@ -12,7 +12,7 @@ public interface IProfesores {
 	void comenzar();
 
 	//Método terminar
-	void teminar();
+	void terminar();
 
 	// Método List<Profesor> getProfesores(), coge una copia del método copiaProfunda para evitar aliasing
 	List<Profesor> getProfesores();

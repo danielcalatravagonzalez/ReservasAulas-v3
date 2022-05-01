@@ -14,9 +14,9 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IReservas;
 
 public class Modelo implements IModelo {
 	// Atributos
-	public IAulas aulas;
-	public IProfesores profesores;
-	public IReservas reservas;
+	private IAulas aulas;
+	private IProfesores profesores;
+	private IReservas reservas;
 
 	// Constructor por defecto
 	public Modelo(IFuenteDatos fuenteDatos) {
@@ -36,9 +36,9 @@ public class Modelo implements IModelo {
 	//Método terminar
 	@Override
 	public void terminar() {
-		aulas.teminar();
-		profesores.teminar();
-		reservas.teminar();
+		aulas.terminar();
+		profesores.terminar();
+		reservas.terminar();
 	}
 
 	// Método List<Aula> getAulas

@@ -121,7 +121,7 @@ public class Aulas implements IAulas {
 	}
 
 	@Override
-	public void teminar() {
+	public void terminar() {
 		// TODO Auto-generated method stub
 		
 	}

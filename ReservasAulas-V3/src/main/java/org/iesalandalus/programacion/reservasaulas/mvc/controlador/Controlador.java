@@ -13,8 +13,8 @@ import org.iesalandalus.programacion.reservasaulas.mvc.vista.IVista;
 
 public class Controlador implements IControlador {
 	//Atributos
-	public IModelo Imodelo;
-	public IVista Ivista;
+	private IModelo Imodelo;
+	private IVista Ivista;
 	
 	//Constructor con parámetros IModelo e IVista
 	public Controlador(IModelo modelo, IVista vista) 
@@ -41,7 +41,7 @@ public class Controlador implements IControlador {
 	@Override
 	public void terminar() {
 		Imodelo.terminar();
-		Ivista.salir();
+		System.out.println("¡Hasta la próxima!");
 	}
 	
 	//Método insertarAula(Aula)

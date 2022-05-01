@@ -54,7 +54,7 @@ public class Reservas implements IReservas {
 			//Método leer
 			private void leer() {
 				File ficherosReservas = new File(NOMBRE_FICHEROS_RESERVAS);
-				try {ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(ficherosReservas));
+				try { ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(ficherosReservas));
 				Reserva reserva = null;
 				do {
 					reserva = (Reserva) entrada.readObject();
@@ -77,18 +77,18 @@ public class Reservas implements IReservas {
 			
 			//Método terminar
 			@Override
-			public void teminar() {
+			public void terminar() {
 				escribir();
 			}
 			
 			//Método escribir
 			private void escribir() {
 				File ficherosReservas = new File(NOMBRE_FICHEROS_RESERVAS);
-				try {ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ficherosReservas));
+				try { ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ficherosReservas));
 				for (Reserva reserva : coleccionReservas)
 					salida.writeObject(reserva);
 				salida.close();
-				System.out.println("Fichero aulas escrito satisfactoriamente.");
+				System.out.println("Fichero reservas escrito satisfactoriamente.");
 				} catch (FileNotFoundException e)  {
 					System.out.println("ERROR: No puedo abrir el fichero de aulas.");	
 				} catch (IOException e)  {
